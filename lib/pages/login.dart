@@ -51,7 +51,7 @@ class Login extends StatelessWidget{
                 onPressed: (){
                   Navigator.push(
                     context, 
-                    MaterialPageRoute(builder: (context)=> const Perfil())
+                    MaterialPageRoute(builder: (context)=> Perfil())
                     );
                   }, 
                 child: Text("Crear Usuario")),
