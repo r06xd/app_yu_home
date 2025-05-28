@@ -12,13 +12,13 @@ class DetalleCatalogoRepository {
   }
 
     Future<List<DetalleCatalogoModel>> getDetalleCatalogos() async {
-    final response = await http.get(Uri.parse('${apiUrl}detalleCatalogoByCatalogo'));
+    final response = await http.get(Uri.parse('${apiUrl}catalogos/detalleCatalogoByCatalogo'));
       final List<dynamic> data = jsonDecode(response.body);
       return data.map((item) => DetalleCatalogoModel.fromJson(item)).toList();
   }
 
   Future<List<DetalleCatalogoModel>> getDetalleCatalogosByCatalogo(int id) async {
-    final response = await http.get(Uri.parse('${apiUrl}detalleCatalogoByCatalogo/$id'));
+    final response = await http.get(Uri.parse('${apiUrl}catalogos/detalleCatalogoByCatalogo/$id'));
     final List<dynamic> data = jsonDecode(response.body);
     return data.map((item) => DetalleCatalogoModel.fromJson(item)).toList();
   }

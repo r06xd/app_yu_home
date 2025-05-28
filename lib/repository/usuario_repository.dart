@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:app_yu_home_front/database/database_helper.dart';
+import 'package:app_yu_home_front/models/cliente_model.dart';
 import 'package:app_yu_home_front/models/usuario_model.dart';
+import 'package:app_yu_home_front/repository/clientes_repository.dart';
 import 'package:http/http.dart' as http;
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -73,6 +75,34 @@ class UserRepository{
   final response = await http.get(Uri.parse('${apiUrl}usuarios'));
   final List<dynamic> data = jsonDecode(response.body);
   final List<User> usuarios = data.map((item) => User.fromJson(item)).toList();
-  return usuarios.any((user) => user.usuario == usuario && user.password == pass);
+  if( usuarios.any((user) => user.usuario == usuario && user.password == pass))
+  {
+    User usuarioEncontrado = usuarios.firstWhere((user) => user.usuario == usuario && user.password == pass);
+    insertarUsuarioLocal(usuarioEncontrado);
+    return true;
+  }
+  return false;
+  }
+
+  Future<void> insertarUsuarioLocal(User usuario)async{
+    ClientesRepository clientesRepository = ClientesRepository();
+    final ClienteModel cliente = await clientesRepository.obtenerClienteByUsuario(usuario.id!);
+       final db = await DatabaseHelper.getDatabase();
+         await db.insert(
+          'usuarios', 
+           {'idUsuario': usuario.id, 'idCliente': cliente.id},
+           conflictAlgorithm: ConflictAlgorithm.replace
+           );
+  }
+
+  Future<int> obtenerIdClienteLocal()async{
+    final db = await DatabaseHelper.getDatabase();
+    final List<Map<String, dynamic>> maps = await db.query('usuarios');
+    return maps[0]['idCliente'];
+  }
+  Future<int> obtenerIdUsuariolocal()async{
+    final db = await DatabaseHelper.getDatabase();
+    final List<Map<String, dynamic>> maps = await db.query('usuarios');
+    return maps[0]['idUsuario'];
   }
 }

@@ -42,20 +42,30 @@ class _PreVisualizacionProducto extends State<PreVisualizacionProducto> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Previsualizacion de producto')),
-      body: _isInitialized
+      body:Center(
+        child: Column(
+          children: [
+           Row( 
+            children: [
+              Text('dato'),Text('datos')
+           ]),
+             _isInitialized
           ? CameraPreview(_controller!)
-          : const Center(child: CircularProgressIndicator()),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.camera),
-        onPressed: () async {
-          if (!_controller!.value.isTakingPicture) {
-            final image = await _controller!.takePicture();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Foto guardada: ${image.path}')),
-            );
-          }
-        },
+          : const Center(child: CircularProgressIndicator())
+          ],
+        ),
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   child: const Icon(Icons.camera),
+      //   onPressed: () async {
+      //     if (!_controller!.value.isTakingPicture) {
+      //       final image = await _controller!.takePicture();
+      //       ScaffoldMessenger.of(context).showSnackBar(
+      //         SnackBar(content: Text('Foto guardada: ${image.path}')),
+      //       );
+      //     }
+      //   },
+      // ),
     );
   }
 }

@@ -55,19 +55,20 @@ class ClienteModel {
       idUsuarioModificacion: map['idUsuarioModificacion']
     );
 
-  factory ClienteModel.fromJson(Map<String, dynamic> json) => ClienteModel(
-    id: json['cl_id'],
-    idUsuario: json['cl_id_usuario'],
-    nombre: json['cl_nombre'],
-    apellido: json['cl_apellido'],
-    direccion: json['cl_direccion'],
-    telefono: json['cl_telefono'],
-    email: json['cl_email'],
-    cedula: json['cl_cedula'],
-    fechaCreacion: json['cl_fecha_creacion'],
-    fechaModificacion: json['cl_fecha_modificacion'],
-    idUsuarioModificacion: json['cl_id_usuario_modificacion']
-  );
+  ClienteModel.fromJson(Map<String, dynamic> json){
+    id= json['cl_id'];
+    idUsuario= json['cl_id_usuario'];
+    nombre= json['cl_nombre'];
+    apellido= json['cl_apellido'];
+    direccion= json['cl_direccion'];
+    telefono= json['cl_telefono'];
+    email= json['cl_email'];
+    cedula= json['cl_cedula'];
+    fechaCreacion= json['cl_fecha_creacion'];
+    fechaModificacion= json['cl_fecha_modificacion'];
+    idUsuarioModificacion= json['cl_id_usuario_modificacion'];
+  }
+
 
   Map<String, dynamic> toJson() => {
     'cl_id': id,

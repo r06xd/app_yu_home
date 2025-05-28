@@ -1,3 +1,4 @@
+import 'package:app_yu_home_front/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -46,18 +47,42 @@ class __SeguimientoCompra extends State<SeguimientoCompra> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Mapa')),
-      body: GoogleMap(
-        onMapCreated: (controller) {
-          mapController = controller;
-        },
-        initialCameraPosition: CameraPosition(
-          target: _center,
-          zoom: 14.0,
-        ),
-        myLocationEnabled: true,
-        myLocationButtonEnabled: true,
-      ),
+      appBar: AppBar(
+        title: Text('Seguimiento de compra', style: TextStyle(fontWeight: FontWeight.bold),),
+        backgroundColor: const Color(0xFF869E00), 
+        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+        centerTitle: true,),
+        drawer: const CustomDrawer(),
+      body: SafeArea(
+        child: Center( child: Column(
+          children: [
+          const SizedBox(height: 50),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(30),
+            child: Container(
+              width: 300,
+              height: 300,
+              color: Colors.grey[200],
+              child: GoogleMap(
+                    onMapCreated: (controller) {
+                      mapController = controller;
+                    },
+                    initialCameraPosition: CameraPosition(
+                      target: _center,
+                      zoom: 14.0,
+                    ),
+                    myLocationEnabled: true,
+                    myLocationButtonEnabled: true,
+              ),
+            ),
+          ),
+          const SizedBox(height: 24),
+          const Text(
+              'Entrega en curso...',
+              style: TextStyle(fontSize: 16),
+            )
+        ])),
+      )
     );
   }
 }

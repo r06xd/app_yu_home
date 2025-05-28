@@ -1,3 +1,4 @@
+import 'package:app_yu_home_front/pages/catalogo_page.dart';
 import 'package:app_yu_home_front/pages/home.dart';
 import 'package:app_yu_home_front/pages/perfil.dart';
 import 'package:app_yu_home_front/repository/usuario_repository.dart';
@@ -64,14 +65,14 @@ class Login extends StatelessWidget{
                     {
                       Navigator.push(
                       context, 
-                      MaterialPageRoute(builder: (context)=> const Home())
+                      MaterialPageRoute(builder: (context)=> Home())
                       )
                     }
                     else
                     {
                       Navigator.push(
                       context, 
-                      MaterialPageRoute(builder: (context)=> const Home())
+                      MaterialPageRoute(builder: (context)=> CatalogoPage())
                       )
                     } 
                   }

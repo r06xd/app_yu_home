@@ -8,7 +8,7 @@ static Future<Database> getDatabase() async {
   if(_database != null) return _database!;
 
   //Define la ruta del archivo
-  final String pathDB = join (await getDatabasesPath(), 'examen4semana.db');
+  final String pathDB = join (await getDatabasesPath(), 'examen8.db');
 
   _database = await openDatabase(
     pathDB,
@@ -17,8 +17,7 @@ static Future<Database> getDatabase() async {
       var batch = db.batch();
 
       batch.execute("DROP TABLE IF EXISTS usuarios;");
-      batch.execute("CREATE TABLE usuarios(id INTEGER PRIMARY KEY AUTOINCREMENT, usuario TEXT, pass TEXT);");
-      batch.execute("INSERT INTO usuarios(usuario,pass) VALUES('Admin','Admin');");
+      batch.execute("CREATE TABLE usuarios(id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario TEXT, idCliente TEXT);");
       await batch.commit();
     }
   );

@@ -37,17 +37,20 @@ class ProductosRepository {
   }
 
   Future<ProductoModel> obtenerProductoById(int id) async {
-    final response = await http.get(Uri.parse('${apiUrl}productosById/$id'));
-    return ProductoModel.fromJson(jsonDecode(response.body));
+    final response = await http.get(Uri.parse('${apiUrl}productos/productosById/$id'));
+    ProductoModel producto = ProductoModel.fromJson(jsonDecode(response.body));
+    producto.variaciones = await getVariacion(producto.id!);
+    return producto;
   }
 
   Future<ProductoModel> obtenerClienteByUsuario(int id) async {
-    final response = await http.get(Uri.parse('${apiUrl}clientesByIdUsuario/$id'));
+    final response = await http.get(Uri.parse('${apiUrl}clientes/clientesByIdUsuario/$id'));
     return ProductoModel.fromJson(jsonDecode(response.body));
   }
 
   Future<List<ProductoVariacionModel>> getVariacion(int id) async {
-    final response = await http.get(Uri.parse('${apiUrl}variacionByProducto/$id'));
+    final response = await http.get(Uri.parse('${apiUrl}productos/variacionByProducto/$id'));
+    if(response.statusCode !=201) return [];
     final List<dynamic> data = jsonDecode(response.body);
     final List<ProductoVariacionModel> productos = data.map((item) => ProductoVariacionModel.fromJson(item)).toList();
     return productos;

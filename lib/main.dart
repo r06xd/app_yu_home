@@ -1,9 +1,16 @@
+import 'package:app_yu_home_front/database/database_helper.dart';
 import 'package:app_yu_home_front/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 void main() async {
   await dotenv.load();
+  String dbPath = await getDatabasesPath();
+  String path = join(dbPath, 'examen8.db'); // cambia por el nombre real de tu BDD
+  await deleteDatabase(path);
+
   runApp(const MyApp());
 }
 

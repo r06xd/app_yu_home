@@ -16,7 +16,7 @@ class CatalogoRepository {
   
   Future<List<CatalogosModel>> getCatalogos() async {
     DetalleCatalogoRepository detalleCatalogoRepository = DetalleCatalogoRepository();
-    final response = await http.get(Uri.parse('${apiUrl}catalogo'));
+    final response = await http.get(Uri.parse('${apiUrl}catalogos'));
     final List<dynamic> data = jsonDecode(response.body);
     List<CatalogosModel> catalogos = data.map((item) => CatalogosModel.fromJson(item)).toList();
     catalogos.forEach((item) async {

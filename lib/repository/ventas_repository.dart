@@ -15,7 +15,7 @@ class VentasRepository {
   /* Acceso API */
   Future<VentaModel> crearVenta(VentaModel venta) async {
     final body =jsonEncode(venta.toJson());
-    final response = await http.post(Uri.parse('${apiUrl}encabezadoVentas'), body: body, headers: {"Content-Type": "application/json"});
+    final response = await http.post(Uri.parse('${apiUrl}ventas/encabezadoVentas'), body: body, headers: {"Content-Type": "application/json"});
     
     venta.detalles?.forEach((item) async{
       await crearDetalleVenta(item);
@@ -41,7 +41,7 @@ class VentasRepository {
   }
 
   Future<VentaModel> obtenerVentaByCliente(int id) async {
-    final response = await http.get(Uri.parse('${apiUrl}ventasByCliente/$id'));
+    final response = await http.get(Uri.parse('${apiUrl}ventas/ventasByCliente/$id'));
     VentaModel venta = VentaModel.fromJson(jsonDecode(response.body));
     venta.detalles = await obtenerDetalleVentaByVenta(venta.id!);
     return venta;
@@ -53,29 +53,29 @@ class VentasRepository {
 
   Future<DetalleVentasModel> crearDetalleVenta(DetalleVentasModel detalle) async{
     final body = jsonEncode(detalle.toJson());
-    final response = await http.post(Uri.parse('${apiUrl}detalleVentas'), body: body, headers: {"Content-Type": "application/json"});
+    final response = await http.post(Uri.parse('${apiUrl}ventas/detalleVentas'), body: body, headers: {"Content-Type": "application/json"});
     return DetalleVentasModel.fromJson(jsonDecode(response.body));
   }
 
   Future<DetalleVentasModel> actualizarDetalleVenta(DetalleVentasModel detalle) async{
     final body = jsonEncode(detalle.toJson());
-    final response = await http.put(Uri.parse('${apiUrl}detalleVentas'), body: body, headers: {"Content-Type": "application/json"});
+    final response = await http.put(Uri.parse('${apiUrl}ventas/detalleVentas'), body: body, headers: {"Content-Type": "application/json"});
     return DetalleVentasModel.fromJson(jsonDecode(response.body));
   }
 
   Future<List<DetalleVentasModel>> obtenerDetalleVenta() async{
-    final response = await http.get(Uri.parse('${apiUrl}detalleVentas'));
+    final response = await http.get(Uri.parse('${apiUrl}ventas/detalleVentas'));
     final List<dynamic> data = jsonDecode(response.body);
     return data.map((item) => DetalleVentasModel.fromJson(item)).toList();
   }
 
   Future<DetalleVentasModel> obtenerDetalleVentaById(int id) async{
-    final response = await http.get(Uri.parse('${apiUrl}detalleVentasById/$id'));
+    final response = await http.get(Uri.parse('${apiUrl}ventas/detalleVentasById/$id'));
     return DetalleVentasModel.fromJson(jsonDecode(response.body));
   }
 
   Future<List<DetalleVentasModel>> obtenerDetalleVentaByVenta(int id) async{
-    final response = await http.get(Uri.parse('${apiUrl}detalleVentasByIdVentas/$id'));
+    final response = await http.get(Uri.parse('${apiUrl}ventas/detalleVentasByIdVentas/$id'));
     final List<dynamic> data = jsonDecode(response.body);
     return data.map((item) => DetalleVentasModel.fromJson(item)).toList();
   }

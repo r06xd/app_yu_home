@@ -31,8 +31,9 @@ class ClientesRepository {
   }
 
   Future<ClienteModel> obtenerClienteByUsuario(int id) async {
-    final response = await http.get(Uri.parse('${apiUrl}clientesByIdUsuario/$id'));
-    return ClienteModel.fromJson(jsonDecode(response.body));
+    final response = await http.get(Uri.parse('${apiUrl}clientes/clientesByIdUsuario/$id'));
+    final List<dynamic> data = jsonDecode(response.body);
+    return ClienteModel.fromJson(data[0]);
   }
 
   Future<void> eliminarUsuario(int id) async {
