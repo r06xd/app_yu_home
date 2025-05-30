@@ -38,7 +38,8 @@ class ProductosRepository {
 
   Future<ProductoModel> obtenerProductoById(int id) async {
     final response = await http.get(Uri.parse('${apiUrl}productos/productosById/$id'));
-    ProductoModel producto = ProductoModel.fromJson(jsonDecode(response.body));
+    List<dynamic> data = jsonDecode(response.body);
+    ProductoModel producto = ProductoModel.fromJson(data[0]);
     producto.variaciones = await getVariacion(producto.id!);
     return producto;
   }

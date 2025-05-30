@@ -1,3 +1,9 @@
+import 'package:app_yu_home_front/models/cliente_model.dart';
+import 'package:app_yu_home_front/models/venta_model.dart';
+import 'package:app_yu_home_front/pages/detalle_producto_page.dart';
+import 'package:app_yu_home_front/repository/clientes_repository.dart';
+import 'package:app_yu_home_front/repository/usuario_repository.dart';
+import 'package:app_yu_home_front/repository/ventas_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
@@ -32,6 +38,33 @@ class _PreVisualizacionProducto extends State<PreVisualizacionProducto> {
     });
   }
 
+  // Future<void> crearVenta()async{
+  //   VentasRepository ventasRepository = new VentasRepository();
+  //   UserRepository usuarioRepository = new UserRepository();
+  //   ClientesRepository clientesRepository = new ClientesRepository();
+  //   int idClienteLocal = await usuarioRepository.obtenerIdClienteLocal();
+  //   VentaModel venta = await ventasRepository.obtenerVentaByCliente(id);
+    
+  //   if(venta==null){
+  //     int idUsuarioLocal = await usuarioRepository.obtenerIdUsuariolocal();
+  //     ClienteModel cliente = await clientesRepository.obtenerClienteByUsuario(idUsuarioLocal);
+  //     VentaModel newVenta = new VentaModel();
+  //     newVenta.idCliente = idClienteLocal;
+  //     newVenta.direccion = cliente.direccion!;
+  //     newVenta.idTipoPago = 1;
+  //     newVenta.estado="INC";
+
+  //     VentaModel newVentaCreada = await ventasRepository.crearVenta(newVenta);
+  //     if(newVentaCreada !=null){
+  //       DetalleVentasModel detalle = new DetalleVentasModel();
+  //       detalle.idVenta = newVentaCreada.id!;
+  //       detalle.idProducto = 1;
+  //       await ventasRepository.crearDetalleVenta(detalle);
+  //     }
+  //     }
+
+  // }
+
   @override
   void dispose() {
     _controller?.dispose();
@@ -47,7 +80,13 @@ class _PreVisualizacionProducto extends State<PreVisualizacionProducto> {
           children: [
            Row( 
             children: [
-              Text('dato'),Text('datos')
+             IconButton(onPressed:(){
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Articulo guardado.')),
+              );
+             }, icon: Icon(Icons.shopping_cart,)),
+             SizedBox(width: 10,),
+             IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,)),
            ]),
              _isInitialized
           ? CameraPreview(_controller!)

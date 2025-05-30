@@ -2,13 +2,13 @@ class VentaModel {
   int? id;
   int? idCliente;
   DateTime? fecha;
-  double? totalVentas;
+  String? totalVentas;
   String? factura;
   String? direccion;
   String? estado;
   int? idTipoPago;
-  DateTime? fechaCreacion;
-  DateTime? fechaModificacion;
+  String? fechaCreacion;
+  String? fechaModificacion;
   int? idUsuarioModificacion;
   List<DetalleVentasModel>? detalles;
 
@@ -91,8 +91,8 @@ class DetalleVentasModel {
   int? id;
   int? idProducto;
   int? idVenta;
-  DateTime? fechaCreacion;
-  DateTime? fechaModificacion;
+  String? fechaCreacion;
+  String? fechaModificacion;
   int? idUsuarioModificacion;
 
   DetalleVentasModel({this.id, this.idProducto, this.idVenta, this.fechaCreacion, this.fechaModificacion, this.idUsuarioModificacion});

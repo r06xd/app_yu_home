@@ -1,7 +1,9 @@
+import 'package:app_yu_home_front/pages/catalogo_page.dart';
 import 'package:app_yu_home_front/pages/home.dart';
 import 'package:app_yu_home_front/pages/login.dart';
 import 'package:app_yu_home_front/pages/perfil.dart';
 import 'package:app_yu_home_front/pages/seguimiento_compra.dart';
+import 'package:app_yu_home_front/pages/ventas.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -21,21 +23,21 @@ class CustomDrawer extends StatelessWidget {
             leading: Icon(Icons.home),
             title: Text('Inicio'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const Home(),));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CatalogoPage(),));
             },
           ),
-          ListTile(
-            leading: Icon(Icons.shopping_cart),
-            title: Text('Compras'),
-            onTap: () {
-              Navigator.pushNamed(context, '/configuracion');
-            },
-          ),
+          // ListTile(
+          //   leading: Icon(Icons.shopping_cart),
+          //   title: Text('Compras'),
+          //   onTap: () {
+          //     Navigator.push(context, MaterialPageRoute(builder: (context) => CatalogoPage(),));
+          //   },
+          // ),
           ListTile(
             leading: Icon(Icons.payments_outlined),
             title: Text('Pagar'),
             onTap: () {
-              Navigator.pushNamed(context, '/configuracion');
+              Navigator.push(context, MaterialPageRoute(builder: (context) => VentasPage(),));
             },
           ),
           ListTile(

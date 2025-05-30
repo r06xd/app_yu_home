@@ -98,11 +98,11 @@ class UserRepository{
   Future<int> obtenerIdClienteLocal()async{
     final db = await DatabaseHelper.getDatabase();
     final List<Map<String, dynamic>> maps = await db.query('usuarios');
-    return maps[0]['idCliente'];
+    return int.parse(maps[0]['idCliente']);
   }
   Future<int> obtenerIdUsuariolocal()async{
     final db = await DatabaseHelper.getDatabase();
     final List<Map<String, dynamic>> maps = await db.query('usuarios');
-    return maps[0]['idUsuario'];
+    return int.parse(maps[0]['idUsuario']);
   }
 }

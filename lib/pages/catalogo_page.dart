@@ -42,10 +42,15 @@ class _CatalogoPageState extends State<CatalogoPage> {
             itemBuilder: (context, index) {
               final producto = productos[index];
               return ListTile(
-                leading: Icon(
-                  Icons.image,
-                  size: 40,
-                ), // Puedes usar NetworkImage si tienes URL de imagen
+                leading: Image(
+                  image:  NetworkImage('https://picsum.photos/id/${index + 1}/200/300'),
+                  width: 40,
+                  height: 40,
+                  ),
+                // Icon(
+                //   Icons.image,
+                //   size: 40,
+                // ), // Puedes usar NetworkImage si tienes URL de imagen
                 title: Text(producto.nombre ?? 'Sin nombre'),
                 subtitle: Text(producto.descripcion ?? ''),
                 onTap: () {

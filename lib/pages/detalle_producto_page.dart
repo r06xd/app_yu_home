@@ -25,6 +25,7 @@ class DetalleProductoPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Image(image: NetworkImage('https://picsum.photos/id/${producto.id}/200/300'), width: 400, height: 400,),
             Text(
               producto.descripcion ?? 'Sin descripción',
               style: TextStyle(fontSize: 16),
